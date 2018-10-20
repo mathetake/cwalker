@@ -80,12 +80,10 @@ int WalkerSampler::getSample() {
     std::uniform_int_distribution<int> idist(0, size);
     std::uniform_real_distribution<> rdist(0.0, 1.0);
 
+    // selected `bin`
     int idx = idist(seed);
-    double threshold = rdist(seed);
 
-    // std::cout << "idx: " << idx << std::endl;
-
-    if (threshold < probabilities[idx]) {
+    if (rdist(seed) < probabilities[idx]) {
         return idx;
     } else {
         return alias[idx];
