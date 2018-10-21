@@ -6,7 +6,7 @@ const double threshold = 10e-4;
 const int sampleNum = 1000000;
 
 void verifySamples(std::vector<double> counts, std::vector<double> data) {
-    for (int i = 0; i < counts.size(); i++ ) {
+    for (auto i = 0; i < counts.size(); ++i ) {
         double diff = (counts[i] / double(sampleNum)) - data[i];
         if (diff < 0) {
             diff = - diff;
@@ -20,8 +20,8 @@ TEST(WalkerTest, TestGetSampler1) {
     std::vector<double> counts = {0, 0, 0};
 
     WalkerSampler sampler (data);
-    for (int i = 0; i< sampleNum; i++) {
-        int res = sampler.getSample();
+    for (auto i = 0; i< sampleNum; ++i) {
+        size_t res = sampler.getSample();
         counts[res]++;
     }
     verifySamples(counts, data);
@@ -33,8 +33,8 @@ TEST(WalkerTest, TestGetSampler2) {
     std::vector<double> counts = {0, 0, 0, 0};
 
     WalkerSampler sampler (data);
-    for (int i = 0; i< sampleNum; i++) {
-        int res = sampler.getSample();
+    for (auto i = 0; i< sampleNum; ++i) {
+        size_t res = sampler.getSample();
         counts[res]++;
     }
     verifySamples(counts, data);
@@ -46,8 +46,8 @@ TEST(WalkerTest, TestGetSampler3) {
     std::vector<double> counts = {0, 0, 0, 0, 0};
 
     WalkerSampler sampler (data);
-    for (int i = 0; i< sampleNum; i++) {
-        int res = sampler.getSample();
+    for (auto i = 0; i< sampleNum; ++i) {
+        size_t res = sampler.getSample();
         counts[res]++;
     }
     verifySamples(counts, data);
