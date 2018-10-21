@@ -2,7 +2,6 @@
 #include <ctime>
 #include <random>
 #include <vector>
-#include <iostream>
 
 
 /*
@@ -30,13 +29,6 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
     }
 
     while (small.empty() || large.empty()) {
-        for (int i = 0; i < small.size(); i++) {
-            std::cout << i << "-th small: " << small[i] << std::endl;
-        }
-
-        for (int i = 0; i < large.size(); i++) {
-            std::cout << i << "-th large: " << large[i] << std::endl;
-        }
 
         int l = small[small.size()-1];
         double pl =  ws[l];
@@ -86,4 +78,9 @@ int WalkerSampler::getSample() {
     } else {
         return alias[idx];
     }
+}
+
+
+int add(int a, int b) {
+    return a+b;
 }

@@ -5,6 +5,9 @@
 #include <map>
 #include <random>
 
+
+int add(int, int);
+
 class WalkerSampler {
     std::mt19937 seed;
     int size;
