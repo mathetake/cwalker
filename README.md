@@ -6,9 +6,18 @@ Ref: https://github.com/mathetake/go-walker
 
 
 # build
-
+```$bash
+git clone https://github.com/mathetake/cwalker
+cd cwalker
+mkdir build && cd build
+cmake ..
+make
+./walker
+```
 
 # test
+
+TODO
 
 
 # LICENSE

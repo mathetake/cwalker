@@ -7,8 +7,9 @@
 
 /*
  *
- * initialize the sampler for given probabilities.
- *
+ * Initialize the sampler for given probabilities.
+ * We implemented the algorithm in `Vose's Alias Method`
+ * in http://www.keithschwarz.com/darts-dice-coins/
  */
 WalkerSampler::WalkerSampler(std::vector<double> ws) {
     // initialize seed and size
@@ -28,7 +29,7 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
         }
     }
 
-    while (!small.empty()) {
+    while (small.empty() || large.empty()) {
         for (int i = 0; i < small.size(); i++) {
             std::cout << i << "-th small: " << small[i] << std::endl;
         }
@@ -38,24 +39,23 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
         }
 
         int l = small[small.size()-1];
+        double pl =  ws[l];
         small.pop_back();
 
         int g = large[large.size()-1];
+        double pg = ws[g];
         large.pop_back();
 
 
-        probabilities[l] = ws[l];
+        probabilities[l] = pl;
         alias[l] = g;
-        ws[g] = (ws[g] + probabilities[l]) - 1;
+        ws[g] = (pg + pl) - 1;
 
         if (ws[g] < 1) {
             small.push_back(g);
         } else {
             large.push_back(g);
         }
-
-        std::cout << l <<"-th probability: " << probabilities[l] << std::endl;
-        std::cout << "=======================\n";
     }
 
 
@@ -64,17 +64,15 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
         large.pop_back();
     }
 
-    for (int i = 0; i < probabilities.size(); i++) {
-        std::cout << i << "-th alias: " << alias[i] << std::endl;
-        std::cout << i << "-th probabilities: " << probabilities[i] << std::endl;
+    while (!small.empty()) {
+        probabilities[small[small.size()-1]] = 1.0;
+        small.pop_back();
     }
 }
 
 
 /*
- *
  * generate a random sample with O(1) complexity.
- *
  */
 int WalkerSampler::getSample() {
     std::uniform_int_distribution<int> idist(0, size);
