@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
-project(test_cmake CXX)
-add_executable(walker main.cpp walker.cpp)
-set(CMAKE_CXX_STANDARD 11)
+project(cwalker CXX)
+add_executable(walker main.cpp src/walker.cpp)
 
+
+set(CMAKE_CXX_STANDARD 11)
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
@@ -13,3 +14,7 @@ elseif(COMPILER_SUPPORTS_CXX0X)
 else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
+
+enable_testing()
+add_subdirectory(src)
+add_subdirectory(test)

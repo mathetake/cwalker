@@ -1,10 +1,10 @@
-#include "walker.hpp"
+#include "src/walker.hpp"
 #include <vector>
 #include <iostream>
 
 int main() {
     // initialize sampler
-    std::vector<double> d = {0.4, 0.2, 0.2, 0.2};
+    std::vector<double> d = {0.2, 0.2, 0.4, 0.2};
     WalkerSampler walkerSampler(d);
 
     // generate samples
