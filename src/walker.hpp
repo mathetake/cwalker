@@ -7,12 +7,12 @@
 
 class WalkerSampler {
     std::mt19937 seed;
-    int size;
-    std::map<int, double> probabilities;
-    std::map<int, int> alias;
+    size_t size;
+    std::map<size_t, double> probabilities;
+    std::map<size_t, size_t > alias;
 public:
     explicit WalkerSampler(std::vector<double>);
-    int getSample();
+    size_t getSample();
 };
 
 #endif

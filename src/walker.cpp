@@ -12,12 +12,12 @@
 WalkerSampler::WalkerSampler(std::vector<double> ws) {
     // initialize seed and size
     seed = std::mt19937(static_cast<unsigned int>(time(nullptr)));
-    size = int(ws.size());
+    size = ws.size();
 
     // create two work lists
-    std::vector<int> small, large;
+    std::vector<size_t> small, large;
 
-    for (int i = 0; i < size; i++) {
+    for (auto i = 0; i < size; ++i) {
         ws[i] *= double(size);
 
         if (ws[i] < 1.0) {
@@ -29,11 +29,11 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
 
     while (!(small.empty() || large.empty())) {
 
-        int l = small[small.size()-1];
+        size_t l = small.back();
         double pl =  ws[l];
         small.pop_back();
 
-        int g = large[large.size()-1];
+        size_t g = large.back();
         double pg = ws[g];
         large.pop_back();
 
@@ -64,12 +64,12 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
 /*
  * generate a random sample with O(1) complexity.
  */
-int WalkerSampler::getSample() {
-    std::uniform_int_distribution<int> idist(0, size-1);
+size_t WalkerSampler::getSample() {
+    std::uniform_int_distribution<size_t > idist(0, size - 1);
     std::uniform_real_distribution<> rdist(0.0, 1.0);
 
     // selected `bin`
-    int idx = idist(seed);
+    size_t idx = idist(seed);
 
     if (rdist(seed) < probabilities[idx]) {
         return idx;

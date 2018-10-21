@@ -10,13 +10,13 @@ int main() {
     // generate samples
     std::vector<double> count = {0, 0, 0, 0};
     int num = 1000000;
-    for (int i = 0; i< num; i++) {
+    for (int i = 0; i< num; ++i) {
         int res = walkerSampler.getSample();
         count[res]++;
     }
 
     // print result
-    for (int i =0; i < count.size(); i++) {
+    for (int i =0; i < count.size(); ++i) {
         std::cout << i << "-th observed probability: "<< count[i] / double(num) << std::endl;
     }
     return 0;
