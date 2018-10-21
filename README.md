@@ -2,23 +2,28 @@
 
 _cwalker_ is an implementation of Walker's sampling method in c++.
 
-Ref: https://github.com/mathetake/go-walker
+Ref:  http://www.keithschwarz.com/darts-dice-coins
 
+# build & test
 
-# build
-```$bash
+1. setup cmake
+```bash
 git clone https://github.com/mathetake/cwalker
 cd cwalker
 mkdir build && cd build
 cmake ..
+```
+
+2. build && run
+```
 make
 ./walker
 ```
 
-# test
-
-TODO
-
+3. run test
+```$xslt
+make test
+```
 
 # LICENSE
 

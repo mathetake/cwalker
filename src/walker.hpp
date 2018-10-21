@@ -14,4 +14,5 @@ public:
     explicit WalkerSampler(std::vector<double>);
     int getSample();
 };
+
 #endif

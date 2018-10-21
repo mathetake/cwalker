@@ -1,10 +1,10 @@
-#include "walker.hpp"
+#include "src/walker.hpp"
 #include <vector>
 #include <iostream>
 
 int main() {
     // initialize sampler
-    std::vector<double> d = {0.4, 0.2, 0.2, 0.2};
+    std::vector<double> d = {0.2, 0.2, 0.4, 0.2};
     WalkerSampler walkerSampler(d);
 
     // generate samples
@@ -16,9 +16,8 @@ int main() {
     }
 
     // print result
-    std::cout << "0-th ratio: "<< count[0] / double(num) << std::endl;
-    std::cout << "1-th ratio: "<< count[1] / double(num) << std::endl;
-    std::cout << "2-th ratio: "<< count[2] / double(num) << std::endl;
-    std::cout << "3-th ratio: "<< count[3] / double(num) << std::endl;
+    for (int i =0; i < count.size(); i++) {
+        std::cout << i << "-th observed probability: "<< count[i] / double(num) << std::endl;
+    }
     return 0;
 }

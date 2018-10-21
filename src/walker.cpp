@@ -2,11 +2,9 @@
 #include <ctime>
 #include <random>
 #include <vector>
-#include <iostream>
 
 
 /*
- *
  * Initialize the sampler for given probabilities.
  * We implemented the algorithm in `Vose's Alias Method`
  * in http://www.keithschwarz.com/darts-dice-coins/
@@ -29,14 +27,7 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
         }
     }
 
-    while (small.empty() || large.empty()) {
-        for (int i = 0; i < small.size(); i++) {
-            std::cout << i << "-th small: " << small[i] << std::endl;
-        }
-
-        for (int i = 0; i < large.size(); i++) {
-            std::cout << i << "-th large: " << large[i] << std::endl;
-        }
+    while (!(small.empty() || large.empty())) {
 
         int l = small[small.size()-1];
         double pl =  ws[l];
@@ -45,7 +36,6 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
         int g = large[large.size()-1];
         double pg = ws[g];
         large.pop_back();
-
 
         probabilities[l] = pl;
         alias[l] = g;
@@ -75,7 +65,7 @@ WalkerSampler::WalkerSampler(std::vector<double> ws) {
  * generate a random sample with O(1) complexity.
  */
 int WalkerSampler::getSample() {
-    std::uniform_int_distribution<int> idist(0, size);
+    std::uniform_int_distribution<int> idist(0, size-1);
     std::uniform_real_distribution<> rdist(0.0, 1.0);
 
     // selected `bin`
